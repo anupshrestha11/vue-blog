@@ -14,11 +14,11 @@
                     </span>
                 </div>
                 <div>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    <Card v-for="post in posts" :key="post.id" :post="post" />
+                    <infinite-loading
+                        @infinite="infiniteHandler"
+                        spinner="bubbles"
+                    ></infinite-loading>
                 </div>
             </div>
             <div class="col-3">
@@ -51,11 +51,30 @@
 </template>
 
 <script>
+import InfiniteLoading from "vue-infinite-loading";
+
 import Hero from "@/components/Hero";
 import Card from "@/components/Card";
 export default {
     name: "Home",
-    components: { Hero, Card },
+    components: { Hero, Card, InfiniteLoading },
+    methods: {
+        infiniteHandler($state) {
+            setTimeout(() => {
+                if (!this.$store.state.isCompleted) {
+                    this.$store.dispatch("addPosts");
+                    $state.loaded();
+                } else {
+                    $state.complete();
+                }
+            }, 1000);
+        },
+    },
+    computed: {
+        posts() {
+            return this.$store.state.posts;
+        },
+    },
 };
 </script>
 

@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 
 
+window.axios = require("axios");
 
 Vue.config.productionTip = false;
 

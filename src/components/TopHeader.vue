@@ -5,14 +5,14 @@
                 Megatron
             </router-link>
         </div>
-        <div>
+        <!-- <div>
             <router-link to="/login" class="btn btn-login">
                 Login
             </router-link>
             <router-link to="/register" class="btn btn-register ">
                 Register
             </router-link>
-        </div>
+        </div> -->
     </header>
 </template>
 

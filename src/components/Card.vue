@@ -11,7 +11,7 @@
                 />
                 <div class="author">
                     <div class="author-name">
-                        Anup Shrestha
+                        {{ post.author }}
                     </div>
                     <div>
                         <small>
@@ -21,40 +21,45 @@
                 </div>
             </div>
             <div>
-                <button class="btn btn-like">
+                <div class="views ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-heart-fill"
+                        class="bi bi-eye-fill"
                         viewBox="0 0 16 16"
                     >
                         <path
-                            fill-rule="evenodd"
-                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                            d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"
+                        />
+                        <path
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
                         />
                     </svg>
                     <span>
-                        0
+                        {{ post.views }}
                     </span>
-                </button>
+                </div>
             </div>
         </div>
         <div>
             <div class="post-title">
-                Lorem ipsum dolor sit amet.
+                <router-link :to="'/post/' + post.slug">
+                    {{ post.title }}
+                </router-link>
             </div>
             <p class="post-excerpt">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
-                minus.
+                {{ post.excerpt }}
             </p>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["post"],
+};
 </script>
 
 <style lang="scss" scoped>
@@ -83,26 +88,30 @@ export default {};
     }
 }
 
-.btn {
+.views {
     display: flex;
     align-items: center;
     border: 0;
     outline: 0;
     color: #fff;
-    background: #748ef3;
+    background: hsl(228, 84%, 50%);
+
     padding: 5px 8px;
     border-radius: 5px;
     svg {
-        padding: 2px;
         margin: 0 5px;
-    }
-    &:hover {
-        background: hsl(228, 84%, 50%);
     }
 }
 .post-title {
     margin: 10px 0 0;
     font-weight: 600;
+    a {
+        color: #777;
+        text-decoration: none;
+        &:hover {
+            color: #333;
+        }
+    }
 }
 .post-excerpt {
     font-size: 0.9rem;
